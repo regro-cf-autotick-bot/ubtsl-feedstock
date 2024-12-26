@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ubtsl-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ubtsl-{{ version }}.tar.gz
   sha256: 9e2b39f389f3742120cab54979211f99b8980775180e01e1cd9ac371bd80a146
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - unicorn-binance-trailing-stop-loss
 
 test:
@@ -30,6 +30,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://www.lucit.tech/unicorn-binance-trailing-stop-loss.html
